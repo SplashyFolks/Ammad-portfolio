@@ -1,20 +1,50 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="page-shell">
       <header className="topbar">
-        <Link href="#hero" className="brand">Ammad</Link>
-        <button className="menu-toggle" aria-label="Open navigation menu">
+        <a href="#hero" className="brand">
+          Ammad<span className="brand-tag">Full-Stack UI/UX</span>
+        </a>
+
+        <button
+          className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((value) => !value)}
+        >
           <span />
           <span />
           <span />
         </button>
-        <nav className="nav-links">
-          <Link href="#about">About</Link>
-          <Link href="#skills">Skills</Link>
-          <Link href="#projects">Projects</Link>
-          <Link href="#contact">Contact</Link>
+
+        <nav className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a href="#skills" onClick={() => setMenuOpen(false)}>Skills</a>
+          <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <a
+            className="button tertiary nav-resume"
+            href="/resume.pdf"
+            download
+            onClick={() => setMenuOpen(false)}
+          >
+            Resume
+          </a>
+          <a
+            className="nav-link-external"
+            href="https://github.com/SplashyFolks/Ammad-portfolio"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setMenuOpen(false)}
+          >
+            GitHub
+          </a>
         </nav>
       </header>
 
